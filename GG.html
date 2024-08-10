@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب نسبة التسكين</title>
+   <style>
+  body { background-image: url("img/step.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment:fixed; }
+  </style>
+  
+</head>
+<body>
+  <h3> @StepUOH </h3>
+    <h1>حساب نسبة التسكين</h1>
+    <label for="uniGPA">أدخل المعدل الجامعي:</label>
+    <input type="number" id="uniGPA" step="0.01" min="0" max="4"><br><br>
+
+    <label for="highschoolWeighted">أدخل موزونة الثانوي:</label>
+    <input type="number" id="highschoolWeighted" step="0.01" min="0" max="100"><br><br>
+
+    <button onclick="calculate()">احسب</button><br><br>
+
+    <p id="result"></p>
+
+    <script>
+        function calculate() {
+            // الحصول على القيم المدخلة
+            var uniGPA = parseFloat(document.getElementById("uniGPA").value);
+            var highschoolWeighted = parseFloat(document.getElementById("highschoolWeighted").value);
+
+            // حساب نسبة التسكين
+            var allocationPercentage = 0.55 * uniGPA + 0.018 * highschoolWeighted;
+
+            // عرض النتيجة
+            var resultText = "نسبة التسكين: " + allocationPercentage.toFixed(2) ;
+
+            // التحقق من إذا كان مؤهلاً للتنافس على الطب
+            if (uniGPA >= 3.75) {
+                resultText += "<br>مؤهل للتنافس على الطب البشري و بقية التخصصات الصحية";
+            }
+          
+else if (uniGPA >= 3.50) {
+                resultText += "<br>مؤهل للتنافس على جميع التخصصات الصحية عدى الطب البشري";
+            }
+      else    if (uniGPA >= 3) {
+                resultText += "<br>مؤهل للتنافس على جميع التخصصات الصحية عدى الطب البشري و طب الاسنان";
+            }
+      else    if (uniGPA >= 0) {
+                resultText += "<br>لا يؤهلك لأي من التخصصات الصحية";
+            }
+            // تحديث النص المعروض في الصفحة
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
